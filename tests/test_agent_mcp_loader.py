@@ -29,7 +29,7 @@ class FakeMCPClient:
 def load_adapted_source_with_fake_mcp():
     root = Path(__file__).resolve().parents[1]
     path = root / "src" / "agent" / "tools" / "mcp_client.py"
-    module_name = "isolated_test_portfolio_agent_mcp_loader"
+    module_name = "isolated_test_agent_mcp_loader"
     spec = importlib.util.spec_from_file_location(module_name, path)
     module = importlib.util.module_from_spec(spec)
     pkg = ModuleType("langchain_mcp_adapters")
@@ -47,7 +47,7 @@ class AgentMCPConfigTests(unittest.TestCase):
         cls.loader = load_adapted_source_with_fake_mcp()
 
     def test_local_only_is_accepted(self):
-        config = self.loader.validate_portfolio_mcp_config(self.loader.MCP_SERVER_CONFIG)
+        config = self.loader.validate_mcp_server_config(self.loader.MCP_SERVER_CONFIG)
         self.assertEqual(config, {"erp-api": {
             "url": "http://127.0.0.1:18880/mcp", "transport": "streamable_http"
         }})
@@ -63,7 +63,7 @@ class AgentMCPConfigTests(unittest.TestCase):
         )
         for case in cases:
             with self.subTest(case=case), self.assertRaises(ValueError):
-                self.loader.validate_portfolio_mcp_config(case)
+                self.loader.validate_mcp_server_config(case)
 
 
 class AgentMCPGroupingTests(unittest.IsolatedAsyncioTestCase):

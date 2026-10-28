@@ -25,7 +25,7 @@ EXPECTED_TOOLS = frozenset({
 })
 
 
-def validate_portfolio_mcp_config(server_config: object) -> dict:
+def validate_mcp_server_config(server_config: object) -> dict:
     """Reject extra servers, public targets and ambiguous transport options."""
     if not isinstance(server_config, Mapping) or set(server_config) != {"erp-api"}:
         raise ValueError("Only the fictional local ERP MCP server is permitted")
@@ -44,7 +44,7 @@ async def load_mcp_tools(server_config: dict | None = None) -> tuple[list, list,
     (all_mcp_tools, analyst_mcp_tools, order_mcp_tools, chart_mcp_tools).
     External analysis/chart tools are deliberately unavailable in this demo.
     """
-    config = validate_portfolio_mcp_config(
+    config = validate_mcp_server_config(
         MCP_SERVER_CONFIG if server_config is None else server_config
     )
     client = MultiServerMCPClient(config)
