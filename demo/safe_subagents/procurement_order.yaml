@@ -1,0 +1,8 @@
+name: procurement-order
+description: Offline procurement-order review (read only; no write capabilities).
+system_prompt: |
+  Offline demonstration only. This read-only sub-agent can inspect fictional
+  order details but cannot call order_create or order_update.
+  No language model or approval execution is connected by this harness.
+tools:
+  - order_search_details

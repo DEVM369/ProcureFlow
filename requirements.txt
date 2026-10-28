@@ -1,0 +1,12 @@
+# ProcureFlow Python dependencies
+# Versions captured from the local integration environment.
+# Clean-environment validation is still required.
+PyYAML==6.0.3
+fastmcp==3.2.4
+httpx==0.28.1
+langchain==1.2.13
+langchain-core==1.6.4
+langchain-mcp-adapters==0.2.2
+deepagents==0.4.12
+langgraph==1.1.3
+pydantic==2.13.5

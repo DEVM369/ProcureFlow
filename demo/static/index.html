@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>ProcureFlow · Procurement Workflow</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="logo">P<span>F</span></span><div><strong>ProcureFlow</strong><small>AGENT ENGINEERING</small></div></div>
+      <div class="micro-title">LOCAL / DEMO MODE</div>
+      <div class="system-card">
+        <div class="status"><span class="dot"></span><span id="server-status">连接检查中</span></div>
+        <div class="stat-line"><span>Data origin</span><b>100% Synthetic</b></div>
+        <div class="stat-line"><span>Runtime</span><b>Deterministic Replay</b></div>
+        <div class="stat-line"><span>External services</span><b>None</b></div>
+        <div class="stat-line"><span>ERP writes</span><b id="writes-status">Disabled</b></div>
+      </div>
+      <div class="micro-title space-top">WORKFLOW</div>
+      <ol class="steps">
+        <li><span>01</span><div><b>Intent & routing</b><small>Task handoff</small></div></li>
+        <li><span>02</span><div><b>Field completion</b><small>Checkpoint-like pause</small></div></li>
+        <li><span>03</span><div><b>Human approval</b><small>One-use decision</small></div></li>
+        <li><span>04</span><div><b>ERP boundary</b><small>In-memory mock only</small></div></li>
+      </ol>
+      <p class="sidebar-foot">本机流程使用虚构采购数据，<strong>不连接真实 ERP 或外部大模型。</strong></p>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><span class="eyebrow">DEMO WORKSPACE</span><h1>Automotive Procurement Copilot</h1></div>
+        <span class="top-pill">LOCAL · 127.0.0.1</span>
+      </header>
+      <section class="content">
+        <div class="intro"><p class="eyebrow accent">SECURITY-FIRST AGENT WORKFLOWS</p>
+          <h2>从自然语言分析，到受控的采购操作。</h2>
+          <p>体验任务分派、信息补齐与人工拒绝。这里的供应商、物料、报价和订单全部为虚构演示数据。</p>
+        </div>
+        <div class="quick-queries" id="quick-queries">
+          <button data-prompt="分析连接器的库存和供应商">↗ 分析库存与供应商</button>
+          <button data-prompt="创建订单，采购连接器">↗ 创建采购订单</button>
+        </div>
+        <div class="thread-meta"><span>CONVERSATION</span><button id="new-chat" type="button">+ 新对话</button></div>
+        <div class="messages" id="messages" aria-live="polite"><div class="empty">选择上方演示场景，或输入一个采购问题开始。</div></div>
+        <section id="interrupt" class="interrupt hidden" aria-live="polite">
+          <div class="interrupt-head"><span class="interrupt-icon">!</span><div><strong id="interrupt-title">需要操作</strong><p id="interrupt-caption">此阶段必须明确处理</p></div></div>
+          <div id="supplement-controls" class="hidden"><label for="supplement">演示补充信息</label><textarea id="supplement" rows="2" placeholder="例如：物料101，数量50，单价42"></textarea><button id="submit-supplement" class="primary" type="button">提交补充信息</button></div>
+          <div id="approval-controls" class="hidden"><p class="approval-note">只会创建虚构订单；默认禁止演示写入。你可以直接测试拒绝路径。</p><div class="actions"><button id="reject" class="secondary" type="button">拒绝订单</button><button id="approve" class="primary" type="button">批准（仅内存演示）</button></div></div>
+        </section>
+      </section>
+      <form id="composer" class="composer"><label class="sr-only" for="prompt">采购需求</label><input id="prompt" maxlength="2000" autocomplete="off" placeholder="输入采购分析或订单需求…"><button class="send" type="submit">发送 <span>↗</span></button></form>
+    </main>
+
+    <aside class="activity">
+      <div class="activity-head"><span class="eyebrow">OBSERVABILITY</span><h3>Execution Trace</h3><p>展示模拟路由和安全阶段，不包含原始工具参数。</p></div>
+      <div class="trace" id="trace"><div class="trace-empty">等待演示请求…</div></div>
+      <div class="orders-box"><div class="stat-line"><span>Synthetic orders</span><b id="order-count">0</b></div><div class="stat-line"><span>Scope</span><b>Memory only</b></div></div>
+    </aside>
+  </div>
+</body>
+</html>
